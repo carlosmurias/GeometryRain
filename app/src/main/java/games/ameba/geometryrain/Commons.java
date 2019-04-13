@@ -1,6 +1,8 @@
 package games.ameba.geometryrain;
 
 public class Commons {
+    public static final String NO_RANDOM = "NoAleatori";
+
     /**
      * @return un valor aleatori entre 15 i 20 que, expressat en milisegons, fa que les shape amb una tasa de
      * refresc de 20 milisegons es moguin més lentes que les de 19, 18, etc. He considerat que per ara,
