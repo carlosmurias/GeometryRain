@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "846871856298",
+    "firebase_url": "https://geometry-rain.firebaseio.com",
+    "project_id": "geometry-rain",
+    "storage_bucket": "geometry-rain.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846871856298:android:4b9aa360163323bb",
+        "android_client_info": {
+          "package_name": "games.ameba.geometryrain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846871856298-c4noi43is2gq3v8mj01kbhd6bg0874hb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwM2URzB77UvwX5fNeEaFL0cqHXltk02Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

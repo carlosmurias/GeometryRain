@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btnExit"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="304dp"
+        android:layout_height="67dp"
+        android:fontFamily="@font/geo"
+        android:text="@string/EXIT"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRank" />
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/geo"
+        android:text="@string/GEOMETRYRAIN_TITLE"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.04" />
+
+    <Button
+        android:id="@+id/btnLoginReg"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="304dp"
+        android:layout_height="67dp"
+        android:fontFamily="@font/geo"
+        android:text="@string/LOGIN_REGISTER_BUTTON"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+    <Button
+        android:id="@+id/btnNewGame"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="304dp"
+        android:layout_height="67dp"
+        android:fontFamily="@font/geo"
+        android:text="@string/NEW_GAME_BUTTON"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLoginReg" />
+
+    <Button
+        android:id="@+id/btnRank"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="304dp"
+        android:layout_height="67dp"
+        android:fontFamily="@font/geo"
+        android:text="@string/RANK"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNewGame" />
+
+    <LinearLayout
+        android:id="@+id/layoutUser"
+        android:layout_width="344dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="3dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnExit">
+
+        <TextView
+            android:id="@+id/txtCurrentUser"
+            android:layout_width="292dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/geo"
+            android:text="cmurias@gmail.com"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/geo"
+            android:text="Logout" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

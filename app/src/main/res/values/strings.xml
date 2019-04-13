@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">GeometryRain</string>
+    <string name="RANK">Ranking</string>
+    <string name="EXIT">Exit</string>
+    <string name="GEOMETRYRAIN_TITLE" translatable="false">GeometryRain</string>
+    <string name="LOGIN_REGISTER_BUTTON">Login/Register</string>
+    <string name="NEW_GAME_BUTTON">New Game</string>
+    <string name="USER_NAME">User Name</string>
+    <string name="PASSWORD">Password</string>
+    <string name="LOGIN">Login</string>
+    <string name="BACK_BUTTON">Back</string>
+    <string name="REGISTER_NEW">Register new account.</string>
+    <string name="OK_BUTTON">OK</string>
+    <string name="REGISTER_TITLE">Register to enjoy all GeometryRain Features</string>
+    <string name="REPEAT">Repeat</string>
+    <string name="COUNTRY">Country</string>
+    <string name="EMAIL">Email</string>
+    <string name="PERSON_NAME">Name</string>
+    <string name="PERSON_SURNAME">Surname</string>
+    <string name="PERSON_ADDRESS">Address</string>
+    <string name="PERSON_PHONE">Phone</string>
+    <string name="REG_ERR_USERNAME1">User name field cannot be empty</string>
+    <string name="REG_ERR_USERNAME2">User name must be at least 4 characters length</string>
+    <string name="REG_ERR_USERNAME3">Existing User Name in Database. Please try another one.</string>
+    <string name="REG_ERR_PASSWORD1">Password field cannot be empty</string>
+    <string name="REG_ERR_PASSWORD2">Password must be at least 8 characters length</string>
+    <string name="REG_ERR_PASSWORD3">Please type your password again</string>
+    <string name="REG_ERR_PASSWORD4">Passwords don\'t match</string>
+    <string name="REG_ERR_PERSON_NAME1">Please specify a valid name</string>
+    <string name="REG_ERR_PERSON_NAME2">Please specify a valid surname</string>
+    <string name="REG_ERR_ADDRESS">Please enter your address</string>
+    <string name="REG_ERR_EMAIL1">Email field cannot be empty</string>
+    <string name="REG_ERR_EMAIL2">Please enter a valid email address</string>
+    <string name="REG_ERR_COUNTRY">Please select a country</string>
+    <string name="ERR_LOGIN_FAILED">Login failed</string>
+</resources>

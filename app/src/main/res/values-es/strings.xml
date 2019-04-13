@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GeometryRain</string>
+    <string name="RANK">Ranking</string>
+    <string name="EXIT">Salir</string>
+    <string name="LOGIN_REGISTER_BUTTON">Inicio/Registro</string>
+    <string name="NEW_GAME_BUTTON">Nueva Partida</string>
+    <string name="USER_NAME">Usuario</string>
+    <string name="PASSWORD">Contraseña</string>
+    <string name="LOGIN">Conectar</string>
+    <string name="BACK_BUTTON">Atrás</string>
+    <string name="REGISTER_NEW">Crear una cuenta nueva</string>
+    <string name="OK_BUTTON">Aceptar</string>
+    <string name="REGISTER_TITLE">Regístrate para disfrutar al máximo de GeometryRain</string>
+    <string name="REPEAT">Repite</string>
+    <string name="COUNTRY">País</string>
+    <string name="EMAIL">Email</string>
+    <string name="PERSON_NAME">Nombre</string>
+    <string name="PERSON_SURNAME">Apellidos</string>
+    <string name="PERSON_ADDRESS">Dirección</string>
+    <string name="PERSON_PHONE">Teléfono</string>
+    <string name="REG_ERR_USERNAME1">El nombre de Usuario no puede estar vacío</string>
+    <string name="REG_ERR_USERNAME2">El nombre de Usuario debe tener al menos 4 caracteres de longitud</string>
+    <string name="REG_ERR_USERNAME3">Nombre de Usuario en uso. Por favor, prueba con otro.</string>
+    <string name="REG_ERR_PASSWORD1">El campo \'Contraseña\' no puede estar vacío</string>
+    <string name="REG_ERR_PASSWORD2">La contraseña debe tener una longitud mínima de 8 caracteres</string>
+    <string name="REG_ERR_PASSWORD3">Por favor, vuelve a introducir la contraseña</string>
+    <string name="REG_ERR_PASSWORD4">Las contraseñas no coinciden</string>
+    <string name="REG_ERR_PERSON_NAME1">Por favor especifica un nombre válido</string>
+    <string name="REG_ERR_PERSON_NAME2">Por favor especifica unos apellidos válidos.</string>
+    <string name="REG_ERR_ADDRESS">Por favor introduce tu dirección</string>
+    <string name="REG_ERR_EMAIL1">El campo \'Email\' no puede estar vacío</string>
+    <string name="REG_ERR_EMAIL2">Por favor introduce una dirección de email válida</string>
+    <string name="REG_ERR_COUNTRY">Por favor selecciona un país</string>
+    <string name="ERR_LOGIN_FAILED">Conexión fallida</string>
+</resources>

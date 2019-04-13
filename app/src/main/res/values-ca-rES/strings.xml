@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GeometryRain</string>
+    <string name="RANK">Rànquing</string>
+    <string name="EXIT">Sortir</string>
+    <string name="LOGIN_REGISTER_BUTTON">Inici/Registre</string>
+    <string name="NEW_GAME_BUTTON">Nova Partida</string>
+    <string name="USER_NAME">Usuari</string>
+    <string name="PASSWORD">Contrasenya</string>
+    <string name="LOGIN">Connectar</string>
+    <string name="BACK_BUTTON">Tornar</string>
+    <string name="REGISTER_NEW">Crear un nou compte.</string>
+    <string name="OK_BUTTON">Acceptar</string>
+    <string name="REGISTER_TITLE">Registra\'t per gaudir al màxim de GeometryRain</string>
+    <string name="REPEAT">Repeteix</string>
+    <string name="COUNTRY">Pais</string>
+    <string name="EMAIL">Email</string>
+    <string name="PERSON_NAME">Nom</string>
+    <string name="PERSON_SURNAME">Cognoms</string>
+    <string name="PERSON_ADDRESS">Adreça</string>
+    <string name="PERSON_PHONE">Telèfon</string>
+    <string name="REG_ERR_USERNAME1">El nom d\'Usuari no pot estar buit</string>
+    <string name="REG_ERR_USERNAME2">El nom d\'Usuari ha de tenir al menys 4 caracters de longitud</string>
+    <string name="REG_ERR_USERNAME3">Nom d\'Usuari en ús. Prova un altre, si us plau.</string>
+    <string name="REG_ERR_PASSWORD1">El camp \'Contrasenya\' no pot estar buit</string>
+    <string name="REG_ERR_PASSWORD2">La contrasenya ha de tenir una longitud mínima de 8 caracters</string>
+    <string name="REG_ERR_PASSWORD3">Si us plau, torna a introduir la contrasenya</string>
+    <string name="REG_ERR_PASSWORD4">Les contrasenyes no coincideixen</string>
+    <string name="REG_ERR_PERSON_NAME1">Si us plau especifica un nom vàlid</string>
+    <string name="REG_ERR_PERSON_NAME2">Si us plau especifica uns cognoms vàlids</string>
+    <string name="REG_ERR_ADDRESS">Si us plau introdueix la teva adreça</string>
+    <string name="REG_ERR_EMAIL1">El camp \'Email\' no pot estar buit</string>
+    <string name="REG_ERR_EMAIL2">Si us plau introdueix una adreça d\'email vàlida</string>
+    <string name="REG_ERR_COUNTRY">Si us plau selecciona un país</string>
+    <string name="ERR_LOGIN_FAILED">Connexió fallida</string>
+</resources>
