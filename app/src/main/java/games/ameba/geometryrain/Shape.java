@@ -49,11 +49,16 @@ public class Shape extends android.support.v7.widget.AppCompatImageView {
      * @param progressBar la barra de vida, que des d'aquí també es controla parcialment
      * @param activity rep per paràmetre el GameActivity que genera aquest fil i, sota determinades circumstàncies, finalitza el joc.
      */
-    public Shape(Context context, ArrayList<Shape> lista, ConstraintLayout constraintLayout, int screenWidth, int screenHeight, int period, ProgressBar progressBar, @Nullable Activity activity) {
+    public Shape(Context context, ArrayList<Shape> lista, ConstraintLayout constraintLayout, int screenWidth, int screenHeight, int period, ProgressBar progressBar, @Nullable Activity activity, String tagRef) {
         super(context);
         this.screenWidth = screenWidth; //rep per paràmetre la mida de la pantalla
         this.screenHeight = screenHeight;
-        this.setImageResource(setImage()); //estableix la figura i la seva etiqueta
+        if (tagRef.isEmpty()){
+            this.setImageResource(setRandomImage()); //estableix la figura i la seva etiqueta
+        } else {
+            this.setImageResource(forceImage(tagRef));
+        }
+
         this.tag = tag;
         this.tagReferencia = tagReferencia;
         this.constraintLayout = constraintLayout;
@@ -90,7 +95,7 @@ public class Shape extends android.support.v7.widget.AppCompatImageView {
      * Funciona de manera semblant al seu homònim del GameActivity: un numero aleatori de 5 possibles i a partir d'aquí s'assigna un valor
      * @return l'id del drawable assignat, per indicar al constructor quina imatge i quin tag ha de dur el shape
      */
-    private int setImage(){
+    private int setRandomImage(){
         int i = (int)Math.floor(Math.random() * 6);
         int ret = -1;
         switch (i) {
@@ -108,6 +113,29 @@ public class Shape extends android.support.v7.widget.AppCompatImageView {
                 break;
             case 4: ret = R.drawable.flecha_verde;
                 tag = "verda";
+                break;
+        }
+        return ret;
+    }
+
+    private int forceImage(String tagRef){
+        int ret = -1;
+        tag = tagRef;
+        switch (tagRef) {
+            case "groga" : ret = R.drawable.flecha_amarilla;
+
+                break;
+            case "blava" : ret = R.drawable.flecha_azul;
+
+                break;
+            case "taronja": ret = R.drawable.flecha_naranja;
+
+                break;
+            case "vermella": ret = R.drawable.flecha_roja;
+
+                break;
+            case "verda": ret = R.drawable.flecha_verde;
+
                 break;
         }
         return ret;

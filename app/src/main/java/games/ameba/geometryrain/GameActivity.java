@@ -75,7 +75,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
          */
         while (lista.size() != 1){
             try{
-                Shape shape = new Shape(this, lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, this);
+                Shape shape = new Shape(this, lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, this, "");
                 lista.add(shape);
             }catch (Exception e){
                 System.out.println(e.getMessage());
@@ -139,7 +139,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (counter == 0){
             try{ //TODO: crear un constructor nou amb una imatge no aleatoria, que sigui igual a la de referencia
-                Shape shape = new Shape(this, lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, this);
+                Shape shape = new Shape(this, lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, this, this.tagReferencia);
                 lista.add(shape);
                 scoreBar.bringToFront();
             }catch (Exception e){
@@ -183,8 +183,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                     shape.destroyShape(); //destrueix la figura en qualsevol cas
-                    Shape shape1 = new Shape(this, lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, this);
-            Shape shape2 = new Shape(this, lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, this);
+                    Shape shape1 = new Shape(this, lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, this, "");
+            Shape shape2 = new Shape(this, lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, this, "");
             lista.add(shape1);
             lista.add(shape2);
                 } catch (Exception e){
