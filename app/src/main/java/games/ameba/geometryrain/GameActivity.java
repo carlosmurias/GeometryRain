@@ -37,8 +37,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     //així com a l'imageView hi ha el mètode setImageResource, no existeix el getImageResource que retorni l'ID.
     // El més senzill ha estat acompanyar les generacions d'imatge amb una variable auxiliar que informi de la mateixa,
     // i per això tant aquí com a la clase Shape hi ha un String tag
-    private ImageView imatgeReferencia;
-    private String tagReferencia;
+    private ImageView imatgeReferencia = null;
+    private String tagReferencia = "";
+    private int iRef;
 
     private ProgressBar progressBar;
     private long score = 0; //la puntuació inicialitza en 0 sempre
@@ -106,8 +107,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void setImage(Runnable runnable){
         int i = (int)Math.floor(Math.random() * 6);
+        while (i== iRef){
+            i = (int)Math.floor(Math.random() * 6);
+        }
+        iRef = i;
 
-        switch (i) {
+        switch (iRef) {
             case 0 : imatgeReferencia.setImageResource(R.drawable.flecha_amarilla);
                 tagReferencia = "groga";
                 break;
@@ -126,9 +131,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         /*
-        Aquí la idea era que, en canviar la imatge de referència, comprovés si a la llista havia actualment alguna figura igual i si no,
-        que en crees una. El tema es que en aquests moments, amb el constructor que tinc, sempre generarà imatges aleatòries. Al To Do ho deixo
-        com a deure pendent.
+        Genera un Shape igual al de la imatge de referència, si no hi ha cap actualment en joc
          */
         int counter = 0;
         for (Shape a : lista){
@@ -138,7 +141,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         if (counter == 0){
-            try{ //TODO: crear un constructor nou amb una imatge no aleatoria, que sigui igual a la de referencia
+            try{
                 Shape shape = new Shape(this, lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, this, this.tagReferencia);
                 lista.add(shape);
                 scoreBar.bringToFront();
