@@ -106,9 +106,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
      * @param runnable tot i que no el faig servir expressament, sempre es una bona opció passar-ho donat que es un objecte Runnable
      */
     private void setImage(Runnable runnable){
-        int i = (int)Math.floor(Math.random() * 6);
-        while (i== iRef){
-            i = (int)Math.floor(Math.random() * 6);
+        int i = Commons.randomInt(5);
+        while (i== iRef){ //amb aquest while es impossible que surti dues vegades seguides el mateix resultat
+            i = Commons.randomInt(5);
         }
         iRef = i;
 

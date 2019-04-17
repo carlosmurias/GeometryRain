@@ -96,7 +96,7 @@ public class Shape extends android.support.v7.widget.AppCompatImageView {
      * @return l'id del drawable assignat, per indicar al constructor quina imatge i quin tag ha de dur el shape
      */
     private int setRandomImage(){
-        int i = (int)Math.floor(Math.random() * 6);
+        int i = Commons.randomInt(5);
         int ret = -1;
         switch (i) {
             case 0 : ret = R.drawable.flecha_amarilla;
@@ -170,15 +170,10 @@ public class Shape extends android.support.v7.widget.AppCompatImageView {
     }
 
     /**
-     * Crea un parell de figures noves abans de destruir aquesta
+     * Elimina el shape de la llista, del layout, i finalitza el timer
      */
     public void destroyShape() {
         try {
-            /*Shape shape1 = new Shape(this.getContext(), lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, activity);
-            Shape shape2 = new Shape(this.getContext(), lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, activity);
-            lista.add(shape1);
-            lista.add(shape2);*/
-
             constraintLayout.removeView(this);
             lista.remove(this);
             timer.cancel();

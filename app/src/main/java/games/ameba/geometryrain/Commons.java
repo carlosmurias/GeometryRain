@@ -1,7 +1,13 @@
 package games.ameba.geometryrain;
 
 public class Commons {
-    public static final String NO_RANDOM = "NoAleatori";
+    /**
+     * @param rang el valor màxim que pot retornar
+     * @return un valor aleatori entre 0 i rang
+     */
+    public static int randomInt(int rang){
+        return (int)Math.floor(Math.random() * (rang +1));
+    }
 
     /**
      * @return un valor aleatori entre 15 i 20 que, expressat en milisegons, fa que les shape amb una tasa de
@@ -10,7 +16,9 @@ public class Commons {
      * els ClickListener no son tan precissos.
      */
     public static int setPeriod() {
-        int i = (int)Math.floor(Math.random() * 6);
-        return 21 - i;
+        return 21 - Commons.randomInt(5);
     }
+
+
+
 }
