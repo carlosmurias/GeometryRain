@@ -105,7 +105,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnNewGame:
                 newGame();
                 break;
+            case R.id.btnRank:
+                rankDisplay();
+                break;
         }
+    }
+
+    private void rankDisplay() {
+        startActivity(new Intent(this, RankingActivity.class));
     }
 
     private void newGame() {
