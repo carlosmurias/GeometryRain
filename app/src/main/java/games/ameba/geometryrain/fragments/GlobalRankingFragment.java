@@ -96,7 +96,7 @@ public class GlobalRankingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_local_ranking, container, false);
+        View view = inflater.inflate(R.layout.fragment_global_ranking, container, false);
         //Preparo la llista de llibres
         usuaris = new ArrayList<User>();
 
@@ -107,7 +107,7 @@ public class GlobalRankingFragment extends Fragment {
         usuaris.add(new User("Wilson Gonsales",4900));
 
         //Referencio el RecyclerView
-        recyclerView = (RecyclerView) view.findViewById(R.id.rView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rViewGlobal);
 
         //afegim l'adaptador amb les dades i el LinearLayoutManager que pintarà les dades
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
