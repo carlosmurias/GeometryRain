@@ -10,8 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 import games.ameba.geometryrain.R;
 import games.ameba.geometryrain.User;
@@ -29,6 +34,7 @@ public class LocalRankingFragment extends Fragment {
     ArrayList<User> usuaris;
     Adaptador adapter;
     RecyclerView recyclerView;
+    Spinner spinner;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -109,7 +115,8 @@ public class LocalRankingFragment extends Fragment {
 
         //Referencio el RecyclerView
         recyclerView = (RecyclerView) view.findViewById(R.id.rView);
-
+        spinner = (Spinner) view.findViewById(R.id.rankSpinner);
+        countries();
         //afegim l'adaptador amb les dades i el LinearLayoutManager que pintarà les dades
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
@@ -123,6 +130,21 @@ public class LocalRankingFragment extends Fragment {
         adapter.notifyDataSetChanged();
 
         return view;
+    }
+
+    private void countries(){
+        String[] locales = Locale.getISOCountries();
+        List<String> countries = new ArrayList<>();
+        countries.add("");
+
+        for (String countryCode : locales) {
+            Locale obj = new Locale("", countryCode);
+            countries.add(obj.getDisplayCountry());
+        }
+
+        Collections.sort(countries);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),android.R.layout.simple_spinner_item, countries);
+        spinner.setAdapter(adapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
