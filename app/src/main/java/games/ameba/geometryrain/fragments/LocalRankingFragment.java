@@ -72,7 +72,7 @@ public class LocalRankingFragment extends Fragment {
         }
 
     }
-    //TODO
+    //TODO: recargarRecicler local ranking
     private void recargarRecicler() {
         //carrega a la llista els llibres guardats a la BD
         //llibres = mostrarTots();

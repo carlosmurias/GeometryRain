@@ -11,15 +11,17 @@
             android:id="@+id/playerName"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="Titol"
-            android:textSize="30sp" />
+            android:text="@string/USER_NAME"
+            android:textSize="30sp"
+            android:fontFamily="@font/geo"/>
 
         <TextView
             android:id="@+id/maxScore"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Autor"
-            android:textSize="20sp" />
+            android:text="MaxScore"
+            android:textSize="20sp"
+            android:fontFamily="@font/geo"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
