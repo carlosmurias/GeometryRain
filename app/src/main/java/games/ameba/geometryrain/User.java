@@ -17,11 +17,17 @@ public class User {
     private String email;
     private String phone;
     private Boolean admin = false;
+    private int maxScore;
 
 
     public User() {
 
     };
+
+    public User(String Username, int maxScore){
+        this.username = Username;
+        this.maxScore = maxScore;
+    }
 
     /**
      * comprova els atributs de l'usuari
@@ -180,5 +186,13 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", admin=" + admin +
                 '}';
+    }
+
+    public int getMaxScore() {
+        return maxScore;
+    }
+
+    public void setMaxScore(int maxScore) {
+        this.maxScore = maxScore;
     }
 }

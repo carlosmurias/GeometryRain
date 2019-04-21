@@ -4,11 +4,18 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import games.ameba.geometryrain.R;
+import games.ameba.geometryrain.User;
+import games.ameba.geometryrain.adapters.Adaptador;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +26,10 @@ import games.ameba.geometryrain.R;
  * create an instance of this fragment.
  */
 public class LocalRankingFragment extends Fragment {
+    ArrayList<User> usuaris;
+    Adaptador adapter;
+    RecyclerView recyclerView;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,13 +70,59 @@ public class LocalRankingFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+    }
+    //TODO
+    private void recargarRecicler() {
+        //carrega a la llista els llibres guardats a la BD
+        //llibres = mostrarTots();
+        //Preparo l'adaptador
+        adapter = new Adaptador(this.getContext(), usuaris);
+        //estableixo l'onClickListener
+        /*adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //agafa la posició del llibre que toquis dins el recyclerView
+                int position = recyclerView.getChildAdapterPosition(v);
+                //crea un nou objecte Llibre igual que el de la posició seleccionada
+                Llibre llibre = adapter.getItemAt(position);
+                //ho passa per paràmetre a la funció obrir detalls
+                obrirDetalls(llibre);
+            }
+        });*/
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_local_ranking, container, false);
+        View view = inflater.inflate(R.layout.fragment_local_ranking, container, false);
+        //Preparo la llista de llibres
+        usuaris = new ArrayList<User>();
+
+        //dades de prova
+        usuaris.add(new User("Paco",3500));
+        usuaris.add(new User("Maria",1200));
+        usuaris.add(new User("Elena",7900));
+        usuaris.add(new User("Antoñito",4900));
+
+        //Referencio el RecyclerView
+        recyclerView = (RecyclerView) view.findViewById(R.id.rView);
+
+        //afegim l'adaptador amb les dades i el LinearLayoutManager que pintarà les dades
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+        //aquesta funció actualitza el recycler, seguint indicacions del tauler
+        recargarRecicler();
+
+        //Això ho he preferit deixar com estava a l'enunciat, perque no em fa nosa
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        //I això també
+        adapter.notifyDataSetChanged();
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,5 +162,26 @@ public class LocalRankingFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public ArrayList<User> mostrarTots(){
+        /*ArrayList<Llibre> llistaLlibres = new ArrayList<Llibre>();
+        //Obrir base de dades
+        bd.obre();
+        //Crida la BD per obtenir tots els llibres
+        Cursor c = bd.obtenirTotsElsLlibres();
+
+        //Situa el cursor a l'inici
+        if (c.moveToFirst()) {
+            do {
+                //carrego els llibres a l'arrayList que és la font del RecyclerView, mentre hagi llibres que passar
+                llistaLlibres.add(carregaLlibre(c));
+            } while (c.moveToNext());
+        }
+        //Tanca la base de dades
+        bd.tanca();
+        return llistaLlibres;*/
+
+        return usuaris;
     }
 }
