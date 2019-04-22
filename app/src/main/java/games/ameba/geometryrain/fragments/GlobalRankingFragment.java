@@ -101,10 +101,10 @@ public class GlobalRankingFragment extends Fragment {
         usuaris = new ArrayList<User>();
 
         //dades de prova
-        usuaris.add(new User("Mobutu",19500));
-        usuaris.add(new User("Hinata",1200));
-        usuaris.add(new User("Lagertha",7900));
-        usuaris.add(new User("Wilson Gonsales",4900));
+        usuaris.add(new User("Mobutu",19500, "South Africa"));
+        usuaris.add(new User("Hinata",1200, "Japan"));
+        usuaris.add(new User("Lagertha",7900, "Norway"));
+        usuaris.add(new User("Wilson Gonsales",4900, "Ecuador"));
 
         //Referencio el RecyclerView
         recyclerView = (RecyclerView) view.findViewById(R.id.rViewGlobal);

@@ -24,9 +24,10 @@ public class User {
 
     };
 
-    public User(String Username, int maxScore){
+    public User(String Username, int maxScore, String country){
         this.username = Username;
         this.maxScore = maxScore;
+        this.country = country;
     }
 
     /**

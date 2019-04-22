@@ -20,7 +20,7 @@ import java.util.Locale;
 
 import games.ameba.geometryrain.R;
 import games.ameba.geometryrain.User;
-import games.ameba.geometryrain.adapters.Adaptador;
+import games.ameba.geometryrain.adapters.AdaptadorLocal;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +32,7 @@ import games.ameba.geometryrain.adapters.Adaptador;
  */
 public class LocalRankingFragment extends Fragment {
     ArrayList<User> usuaris;
-    Adaptador adapter;
+    AdaptadorLocal adapter;
     RecyclerView recyclerView;
     Spinner spinner;
 
@@ -83,7 +83,7 @@ public class LocalRankingFragment extends Fragment {
         //carrega a la llista els llibres guardats a la BD
         //llibres = mostrarTots();
         //Preparo l'adaptador
-        adapter = new Adaptador(this.getContext(), usuaris);
+        adapter = new AdaptadorLocal(this.getContext(), usuaris);
         //estableixo l'onClickListener
         /*adapter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,10 +108,10 @@ public class LocalRankingFragment extends Fragment {
         usuaris = new ArrayList<User>();
 
         //dades de prova
-        usuaris.add(new User("Paco",3500));
-        usuaris.add(new User("Maria",1200));
-        usuaris.add(new User("Elena",7900));
-        usuaris.add(new User("Antoñito",4900));
+        usuaris.add(new User("Paco",3500, "España"));
+        usuaris.add(new User("Maria",1200, "España"));
+        usuaris.add(new User("Elena",7900, "España"));
+        usuaris.add(new User("Antoñito",4900, "España"));
 
         //Referencio el RecyclerView
         recyclerView = (RecyclerView) view.findViewById(R.id.rView);
@@ -120,14 +120,14 @@ public class LocalRankingFragment extends Fragment {
         //afegim l'adaptador amb les dades i el LinearLayoutManager que pintarà les dades
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        //aquesta funció actualitza el recycler, seguint indicacions del tauler
+        //aquesta funció actualitza el recycler
         recargarRecicler();
 
-        //Això ho he preferit deixar com estava a l'enunciat, perque no em fa nosa
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         //I això també
         adapter.notifyDataSetChanged();
+
 
         return view;
     }
@@ -140,7 +140,7 @@ public class LocalRankingFragment extends Fragment {
         for (String countryCode : locales) {
             Locale obj = new Locale("", countryCode);
             countries.add(obj.getDisplayCountry());
-            System.out.println(countryCode); //Hola GitLab 22/04/2019 18:02
+            //System.out.println(countryCode); //Hola GitLab 22/04/2019 18:02
         }
 
         Collections.sort(countries);

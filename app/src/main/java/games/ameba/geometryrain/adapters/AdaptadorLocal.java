@@ -6,23 +6,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
 import games.ameba.geometryrain.R;
 import games.ameba.geometryrain.User;
 
-public class Adaptador extends RecyclerView.Adapter<Adaptador.ElMeuViewHolder> implements View.OnClickListener {
+public class AdaptadorLocal extends RecyclerView.Adapter<AdaptadorLocal.ElMeuViewHolder> implements View.OnClickListener {
     private ArrayList<User> items;
     private Context context;
     private View.OnClickListener listener;
     //Creem el constructor
-    public Adaptador(Context context, ArrayList<User> items) {
+    public AdaptadorLocal(Context context, ArrayList<User> items) {
         this.context = context;
         this.items= items;
     }
     //Crea noves files (l'invoca el layout manager). Aquí fem referència al layout fila.xml
     @Override
-    public Adaptador.ElMeuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AdaptadorLocal.ElMeuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fila, null);
@@ -49,7 +50,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ElMeuViewHolder> i
         viewHolder.vPlayerName.setText(user.getUsername());
         viewHolder.vMaxScore.setText(String.valueOf(user.getMaxScore()));
         viewHolder.vDate.setText("22/04/2019"); //TODO: dades provisionals per a Date i Country
-        viewHolder.vCountry.setText(user.getCountry());
+        viewHolder.vCountry.setText("");
     }
     //retorna un enter que és la posició d'un llibre dins la llista
     public User getItemAt(int position) {
