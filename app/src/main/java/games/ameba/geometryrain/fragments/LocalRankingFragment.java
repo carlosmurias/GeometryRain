@@ -140,6 +140,7 @@ public class LocalRankingFragment extends Fragment {
         for (String countryCode : locales) {
             Locale obj = new Locale("", countryCode);
             countries.add(obj.getDisplayCountry());
+            System.out.println(countryCode); //Hola GitLab 22/04/2019
         }
 
         Collections.sort(countries);
