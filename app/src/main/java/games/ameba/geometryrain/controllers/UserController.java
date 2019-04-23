@@ -14,6 +14,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import games.ameba.geometryrain.User;
 
 public final class UserController {
@@ -145,4 +149,14 @@ public final class UserController {
         signedInUser=null;
     }
 
+    public static void addGameScore(long score) {
+        addGameScore(score, new Date());
+    }
+
+    public static void addGameScore(long score, Date date) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("date", date);
+        data.put("score", score);
+        db.collection("users").document(signedInUser.getUid()).collection("games").add(data);
+    }
 }

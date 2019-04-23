@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import games.ameba.geometryrain.controllers.UserController;
+
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     //Mida de la pantalla
     private int screenWidth;
@@ -187,9 +189,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     shape.destroyShape(); //destrueix la figura en qualsevol cas
                     Shape shape1 = new Shape(this, lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, this, "");
-            Shape shape2 = new Shape(this, lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, this, "");
-            lista.add(shape1);
-            lista.add(shape2);
+                    Shape shape2 = new Shape(this, lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, this, "");
+                    lista.add(shape1);
+                    lista.add(shape2);
                 } catch (Exception e){
                     //noError = false;
                 }
@@ -211,6 +213,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
      * Acaba la partida
      */
     private void gameOver() {
+        UserController.addGameScore(score);
+        Toast.makeText(this, "GAME OVER - " +String.valueOf(score)+ " points.", Toast.LENGTH_LONG).show();
         try{
             for(Shape a : lista){
                 Shape shape = a;
@@ -221,8 +225,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
         timer.cancel();
         timer.purge();
-
-        Toast.makeText(this, "GAME OVER - " +String.valueOf(score)+ " points.", Toast.LENGTH_LONG).show();
         finish();
     }
 
