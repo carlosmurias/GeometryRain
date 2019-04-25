@@ -1,5 +1,8 @@
 package games.ameba.geometryrain;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Commons {
     /**
      * @param rang el valor màxim que pot retornar
@@ -19,7 +22,10 @@ public class Commons {
         return 21 - Commons.randomInt(5);
     }
 
-
+    public static String dateFormat(Date d){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(d);
+    }
 
 
 

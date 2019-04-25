@@ -3,10 +3,12 @@ package games.ameba.geometryrain.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +16,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import games.ameba.geometryrain.R;
-import games.ameba.geometryrain.User;
+import games.ameba.geometryrain.RankedUser;
 import games.ameba.geometryrain.adapters.Adaptador;
+import games.ameba.geometryrain.controllers.RankingController;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,9 +29,10 @@ import games.ameba.geometryrain.adapters.Adaptador;
  * create an instance of this fragment.
  */
 public class GlobalRankingFragment extends Fragment {
-    ArrayList<User> usuaris;
+    ArrayList<RankedUser> usuaris;
     Adaptador adapter;
     RecyclerView recyclerView;
+    boolean loading = true;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,12 +74,15 @@ public class GlobalRankingFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
     //TODO: recargarRecicler global ranking
     private void recargarRecicler() {
         //carrega a la llista els llibres guardats a la BD
         //llibres = mostrarTots();
         //Preparo l'adaptador
+
+
         adapter = new Adaptador(this.getContext(), usuaris);
         //estableixo l'onClickListener
         /*adapter.setOnClickListener(new View.OnClickListener() {
@@ -97,14 +104,8 @@ public class GlobalRankingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_global_ranking, container, false);
-        //Preparo la llista de llibres
-        usuaris = new ArrayList<User>();
 
-        //dades de prova
-        usuaris.add(new User("Mobutu",19500, "South Africa"));
-        usuaris.add(new User("Hinata",1200, "Japan"));
-        usuaris.add(new User("Lagertha",7900, "Norway"));
-        usuaris.add(new User("Wilson Gonsales",4900, "Ecuador"));
+        usuaris = new ArrayList<RankedUser>();
 
         //Referencio el RecyclerView
         recyclerView = (RecyclerView) view.findViewById(R.id.rViewGlobal);
@@ -112,16 +113,36 @@ public class GlobalRankingFragment extends Fragment {
         //afegim l'adaptador amb les dades i el LinearLayoutManager que pintarà les dades
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        //aquesta funció actualitza el recycler, seguint indicacions del tauler
+        //aquesta funció actualitza el recycler
         recargarRecicler();
 
-        //Això ho he preferit deixar com estava a l'enunciat, perque no em fa nosa
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        //I això també
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter.notifyDataSetChanged();
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        new RankingController().getGlobalTop(10).setOnSignInListener(new RankingController.onRankingResultListener() {
+            @Override
+            public void onRankingResult(ArrayList<RankedUser> rankedUsers) {
+                // rankedUsers és el arraylist con los resultados
+                //usuaris = rankedUsers;
+                for (RankedUser r : rankedUsers) {
+                    usuaris.add(r);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.d("BACKEND", "Error getting documents: ", e);
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -163,7 +184,7 @@ public class GlobalRankingFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public ArrayList<User> mostrarTots(){
+    public ArrayList<RankedUser> mostrarTots(){
         /*ArrayList<Llibre> llistaLlibres = new ArrayList<Llibre>();
         //Obrir base de dades
         bd.obre();
