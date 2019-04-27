@@ -49,8 +49,12 @@ public class Shape extends android.support.v7.widget.AppCompatImageView {
      * @param progressBar la barra de vida, que des d'aquí també es controla parcialment
      * @param activity rep per paràmetre el GameActivity que genera aquest fil i, sota determinades circumstàncies, finalitza el joc.
      */
-    public Shape(Context context, ArrayList<Shape> lista, ConstraintLayout constraintLayout, int screenWidth, int screenHeight, int period, ProgressBar progressBar, @Nullable Activity activity, String tagRef) {
+    public Shape(Context context, ArrayList<Shape> lista, ConstraintLayout constraintLayout, int screenWidth,
+                 int screenHeight, int period, ProgressBar progressBar, @Nullable Activity activity, @Nullable String tagRef) {
         super(context);
+        this.progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+        this.activity = activity;
+        this.progressBar = progressBar;
         this.screenWidth = screenWidth; //rep per paràmetre la mida de la pantalla
         this.screenHeight = screenHeight;
         if (tagRef.isEmpty()){
@@ -85,10 +89,6 @@ public class Shape extends android.support.v7.widget.AppCompatImageView {
                 });
             }
         }, 0, period); //observeu que la periodicitat es un valor passat per paràmetre, generat pel mètode estàtic Commons.setPeriod()
-
-        this.progressBar = (ProgressBar) findViewById(R.id.progressBar2);
-        this.activity = activity;
-        this.progressBar = progressBar;
     }
 
     /**
@@ -115,6 +115,15 @@ public class Shape extends android.support.v7.widget.AppCompatImageView {
                 tag = "verda";
                 break;
         }
+
+        //figura per recuperar vida
+        i = Commons.randomInt(100);
+        System.out.print("valor aleatori: "+ i);
+        if ((i < 10) && (progressBar.getProgress() < 50)){
+            ret = R.drawable.heart;
+            tag = "vida";
+        }
+
         return ret;
     }
 

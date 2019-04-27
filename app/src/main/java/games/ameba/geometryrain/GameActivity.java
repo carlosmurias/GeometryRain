@@ -178,8 +178,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             boolean noError = true;
             do {
                 try {
+                    System.out.println(shape.getTag());
                     if (shape.getTag().equals(this.tagReferencia)){ //si coincideixen els tags
                         updateScore(); //actualitza la puntuació
+                    } else if(shape.getTag().equals("vida")){ //si es un cor retorna vida
+                        progressBar.setProgress(progressBar.getProgress() + 10);
+                        Toast.makeText(this, String.valueOf(progressBar.getProgress()), Toast.LENGTH_LONG).show();
                     } else {
                         progressBar.setProgress(progressBar.getProgress() -10); //si no, resta 10 punts de vida
 
@@ -192,6 +196,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     Shape shape2 = new Shape(this, lista, constraintLayout, screenWidth,screenHeight, Commons.setPeriod(), progressBar, this, "");
                     lista.add(shape1);
                     lista.add(shape2);
+                    //lista.add(new ShapeHealthRestoreItem(this,lista,constraintLayout,screenWidth,screenHeight,21,progressBar, this,null));
                 } catch (Exception e){
                     //noError = false;
                 }
