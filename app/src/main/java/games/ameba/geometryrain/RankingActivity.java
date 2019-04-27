@@ -16,20 +16,33 @@ public class RankingActivity extends AppCompatActivity implements View.OnClickLi
     Button btnLocal, btnGlobal;
     GlobalRankingFragment globalRankingFragment;
     LocalRankingFragment localRankingFragment;
+    String myCountry;
+    Bundle b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            myCountry = bundle.getString("country");
+        } else {
+            myCountry = "";
+        }
+
         btnLocal = (Button) findViewById(R.id.btnLocal);
         btnGlobal = (Button) findViewById(R.id.btnGlobal);
 
         btnGlobal.setOnClickListener(this);
         btnLocal.setOnClickListener(this);
-        //ara toca posar el fragment llanterna com a fragment per defecte dins el frameLayout
+        //poso el ranking local com a fragment per defecte dins el framelayout, i passo el pais del jugador perque el mostri també per defecte
+
+        b = new Bundle();
+        b.putString("country", myCountry);
+
         localRankingFragment = new LocalRankingFragment();
-        //mitjançant aquest mètode li puc dir que posi el fragment indicat dins el contenidor
+        localRankingFragment.setArguments(b);
         getSupportFragmentManager().beginTransaction().add(R.id.contenidor, localRankingFragment).commit();
     }
 
@@ -38,6 +51,7 @@ public class RankingActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) { //com que son set fragments, és millor fer servir un switch/case que no pas anidar if/elses
             case R.id.btnLocal:
                 localRankingFragment = new LocalRankingFragment(); //declara nova instància
+                localRankingFragment.setArguments(b);
                 //mitjançant un objecte de tipus FragmentTransaction es pot fer el canvi de fragment al contenidor
                 FragmentTransaction transitionLLant = getSupportFragmentManager().beginTransaction();
                 //remplaça el fragment antic pel nou

@@ -3,24 +3,29 @@ package games.ameba.geometryrain.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.ConcurrentModificationException;
 import java.util.List;
-import java.util.Locale;
 
+import games.ameba.geometryrain.Commons;
 import games.ameba.geometryrain.R;
-import games.ameba.geometryrain.User;
+import games.ameba.geometryrain.RankedUser;
 import games.ameba.geometryrain.adapters.AdaptadorLocal;
+import games.ameba.geometryrain.controllers.RankingController;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,11 +35,12 @@ import games.ameba.geometryrain.adapters.AdaptadorLocal;
  * Use the {@link LocalRankingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LocalRankingFragment extends Fragment {
-    ArrayList<User> usuaris;
+public class LocalRankingFragment extends Fragment implements Spinner.OnItemSelectedListener {
+    ArrayList<RankedUser> usuaris;
     AdaptadorLocal adapter;
     RecyclerView recyclerView;
     Spinner spinner;
+    String currentCountry;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,22 +86,8 @@ public class LocalRankingFragment extends Fragment {
     }
     //TODO: recargarRecicler local ranking
     private void recargarRecicler() {
-        //carrega a la llista els llibres guardats a la BD
-        //llibres = mostrarTots();
         //Preparo l'adaptador
         adapter = new AdaptadorLocal(this.getContext(), usuaris);
-        //estableixo l'onClickListener
-        /*adapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //agafa la posició del llibre que toquis dins el recyclerView
-                int position = recyclerView.getChildAdapterPosition(v);
-                //crea un nou objecte Llibre igual que el de la posició seleccionada
-                Llibre llibre = adapter.getItemAt(position);
-                //ho passa per paràmetre a la funció obrir detalls
-                obrirDetalls(llibre);
-            }
-        });*/
         recyclerView.setAdapter(adapter);
     }
 
@@ -104,19 +96,26 @@ public class LocalRankingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_local_ranking, container, false);
-        //Preparo la llista de llibres
-        usuaris = new ArrayList<User>();
+        //Agafo el pais que llistarà per defecte:
+        Bundle b = this.getArguments();
+        if (b != null){
+            currentCountry = b.getString("country");
+        } else {
+            currentCountry = "";
+        }
 
-        //dades de prova
-        usuaris.add(new User("Paco",3500, "España"));
-        usuaris.add(new User("Maria",1200, "España"));
-        usuaris.add(new User("Elena",7900, "España"));
-        usuaris.add(new User("Antoñito",4900, "España"));
-
+        //Preparo la llista d'usuaris
+        usuaris = new ArrayList<RankedUser>();
         //Referencio el RecyclerView
         recyclerView = (RecyclerView) view.findViewById(R.id.rView);
+        //Referencio l'spinner i afegeixo el listener per al canvi d'element seleccionat
         spinner = (Spinner) view.findViewById(R.id.rankSpinner);
         countries();
+        spinner.setOnItemSelectedListener(this);
+
+        spinner.setSelection(getIndex(spinner, currentCountry));
+
+
         //afegim l'adaptador amb les dades i el LinearLayoutManager que pintarà les dades
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
@@ -125,30 +124,60 @@ public class LocalRankingFragment extends Fragment {
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        //I això també
         adapter.notifyDataSetChanged();
 
 
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        new RankingController().getCountryTop(currentCountry, 10).setOnSignInListener(new RankingController.onRankingResultListener() {
+            @Override
+            public void onRankingResult(ArrayList<RankedUser> rankedUsers) {
+                // rankedUsers és el arraylist con los resultados
+                for (RankedUser r : rankedUsers) {
+                    usuaris.add(r);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.d("BACKEND", "Error getting documents: ", e);
+            }
+        });
+    }
+
+
+
     private void countries(){
-        String[] locales = Locale.getISOCountries();
+        String[] paisos = Commons.getCountries();
         List<String> countries = new ArrayList<>();
         countries.add("");
 
-        for (String countryCode : locales) {
-            Locale obj = new Locale("", countryCode);
-            countries.add(obj.getDisplayCountry());
-            //System.out.println(countryCode); //Hola GitLab 22/04/2019 18:02
+        for (String pais : paisos) {
+            countries.add(pais);
         }
 
         Collections.sort(countries);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),android.R.layout.simple_spinner_item, countries);
         spinner.setAdapter(adapter);
     }
+    //private method of your class
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
 
-    // TODO: Rename method, update argument and hook method into UI event
+        return 0;
+    }
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -172,6 +201,44 @@ public class LocalRankingFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            currentCountry = spinner.getSelectedItem().toString();
+            System.out.println(currentCountry);
+        new RankingController().getCountryTop(currentCountry, 10).setOnSignInListener(new RankingController.onRankingResultListener() {
+            @Override
+            public void onRankingResult(ArrayList<RankedUser> rankedUsers) {
+                // rankedUsers és el arraylist con los resultados
+                try{
+                    for(RankedUser ru : usuaris){
+                        usuaris.clear();
+                    }
+                } catch (ConcurrentModificationException c){
+                    //Aquest error apareix a vegades al canviar d'element
+                }
+
+                for (RankedUser r : rankedUsers) {
+                    usuaris.add(r);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.d("BACKEND", "Error getting documents: ", e);
+            }
+        });
+
+
+        //spinner.setSelection(getIndex(spinner, currentCountry));
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -187,24 +254,4 @@ public class LocalRankingFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public ArrayList<User> mostrarTots(){
-        /*ArrayList<Llibre> llistaLlibres = new ArrayList<Llibre>();
-        //Obrir base de dades
-        bd.obre();
-        //Crida la BD per obtenir tots els llibres
-        Cursor c = bd.obtenirTotsElsLlibres();
-
-        //Situa el cursor a l'inici
-        if (c.moveToFirst()) {
-            do {
-                //carrego els llibres a l'arrayList que és la font del RecyclerView, mentre hagi llibres que passar
-                llistaLlibres.add(carregaLlibre(c));
-            } while (c.moveToNext());
-        }
-        //Tanca la base de dades
-        bd.tanca();
-        return llistaLlibres;*/
-
-        return usuaris;
-    }
 }

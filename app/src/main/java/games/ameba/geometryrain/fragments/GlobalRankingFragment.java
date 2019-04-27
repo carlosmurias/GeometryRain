@@ -78,24 +78,9 @@ public class GlobalRankingFragment extends Fragment {
     }
     //TODO: recargarRecicler global ranking
     private void recargarRecicler() {
-        //carrega a la llista els llibres guardats a la BD
-        //llibres = mostrarTots();
         //Preparo l'adaptador
-
-
         adapter = new Adaptador(this.getContext(), usuaris);
-        //estableixo l'onClickListener
-        /*adapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //agafa la posició del llibre que toquis dins el recyclerView
-                int position = recyclerView.getChildAdapterPosition(v);
-                //crea un nou objecte Llibre igual que el de la posició seleccionada
-                Llibre llibre = adapter.getItemAt(position);
-                //ho passa per paràmetre a la funció obrir detalls
-                obrirDetalls(llibre);
-            }
-        });*/
+
         recyclerView.setAdapter(adapter);
     }
 
@@ -184,24 +169,4 @@ public class GlobalRankingFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public ArrayList<RankedUser> mostrarTots(){
-        /*ArrayList<Llibre> llistaLlibres = new ArrayList<Llibre>();
-        //Obrir base de dades
-        bd.obre();
-        //Crida la BD per obtenir tots els llibres
-        Cursor c = bd.obtenirTotsElsLlibres();
-
-        //Situa el cursor a l'inici
-        if (c.moveToFirst()) {
-            do {
-                //carrego els llibres a l'arrayList que és la font del RecyclerView, mentre hagi llibres que passar
-                llistaLlibres.add(carregaLlibre(c));
-            } while (c.moveToNext());
-        }
-        //Tanca la base de dades
-        bd.tanca();
-        return llistaLlibres;*/
-
-        return usuaris;
-    }
 }

@@ -13,7 +13,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -77,13 +76,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      * i el carrega a l'spinner mitjançamt im ArrayAdapter
      */
     private void countries(){
-        String[] locales = Locale.getISOCountries();
+        //String[] locales = Locale.getISOCountries();
+        String[] paisos = Commons.getCountries();
         List<String> countries = new ArrayList<>();
         countries.add("");
 
-        for (String countryCode : locales) {
+
+        /*for (String countryCode : locales) {
             Locale obj = new Locale("", countryCode);
             countries.add(obj.getDisplayCountry());
+        }*/
+
+        for (String pais : paisos){
+            countries.add(pais);
         }
 
         Collections.sort(countries);

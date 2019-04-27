@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnLoginRegister, btnNewGame, btnRank, btnExit, btnLogout;
     TextView txtUserName;
     LinearLayout layoutUser;
-    String UserName;
+    String UserName, country;
 
     /**
      * Mètode callback de creació de l'activity. S'indica el layout,
@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 showToast("Welcome "+user.getUsername());
                 setLogged(true);
                 UserName = user.getUsername();
+                country = user.getCountry();
                 txtUserName.setText(UserName);
                 layoutUser.setVisibility(View.VISIBLE);
                 setButtonListenerToThis(btnLogout);
@@ -110,9 +111,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
+/*
+* al obrir l'activity, se li passa un bundle amb el pais perque mostri
+* per defecte el ranking del pais del jugador
+*/
     private void rankDisplay() {
-        startActivity(new Intent(this, RankingActivity.class));
+        Intent i = new Intent(this, RankingActivity.class);
+        Bundle extras = new Bundle();
+        extras.putString("country", country);
+        i.putExtras(extras);
+        startActivity(i);
     }
 
     private void newGame() {

@@ -9,15 +9,16 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import games.ameba.geometryrain.Commons;
 import games.ameba.geometryrain.R;
-import games.ameba.geometryrain.User;
+import games.ameba.geometryrain.RankedUser;
 
 public class AdaptadorLocal extends RecyclerView.Adapter<AdaptadorLocal.ElMeuViewHolder> implements View.OnClickListener {
-    private ArrayList<User> items;
+    private ArrayList<RankedUser> items;
     private Context context;
     private View.OnClickListener listener;
     //Creem el constructor
-    public AdaptadorLocal(Context context, ArrayList<User> items) {
+    public AdaptadorLocal(Context context, ArrayList<RankedUser> items) {
         this.context = context;
         this.items= items;
     }
@@ -46,21 +47,22 @@ public class AdaptadorLocal extends RecyclerView.Adapter<AdaptadorLocal.ElMeuVie
          * position conté la posició de l'element actual a la llista. També l'utilitzarem
          * com a índex per a recòrrer les dades
          * */
-        User user = (User) items.get(position);
+        RankedUser user = (RankedUser) items.get(position);
         viewHolder.vPlayerName.setText(user.getUsername());
-        viewHolder.vMaxScore.setText(String.valueOf(user.getMaxScore()));
-        viewHolder.vDate.setText("22/04/2019"); //TODO: dades provisionals per a Date i Country
+        viewHolder.vMaxScore.setText(String.valueOf(user.getScore()));
+        viewHolder.vDate.setText(Commons.dateFormat(user.getDate()));
         viewHolder.vCountry.setText("");
+        viewHolder.vPosition.setText(String.valueOf(position + 1));
     }
     //retorna un enter que és la posició d'un llibre dins la llista
-    public User getItemAt(int position) {
+    public RankedUser getItemAt(int position) {
         return items.get(position);
     }
 
     //Definim el nostre ViewHolder, és a dir, un element de la llista en qüestió
     public static class ElMeuViewHolder extends RecyclerView.ViewHolder {
         //L'exemple de l'enunciat tenia només un TextView, ara son dos
-        protected TextView vPlayerName, vMaxScore, vDate, vCountry;
+        protected TextView vPlayerName, vMaxScore, vDate, vCountry, vPosition;
         public ElMeuViewHolder(View v) {
             super(v);
             //Els referenciem al layout
@@ -68,6 +70,7 @@ public class AdaptadorLocal extends RecyclerView.Adapter<AdaptadorLocal.ElMeuVie
             vMaxScore = (TextView) v.findViewById(R.id.maxScore);
             vDate=(TextView)v.findViewById(R.id.scoreDate);
             vCountry=(TextView)v.findViewById(R.id.playerCountry);
+            vPosition =(TextView)v.findViewById(R.id.txtPosition);
         }
     }
     //l'onClickListener de l'adaptador i, per extensió, del RecyclerView
