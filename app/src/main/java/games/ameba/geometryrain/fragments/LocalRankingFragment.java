@@ -167,7 +167,7 @@ public class LocalRankingFragment extends Fragment implements Spinner.OnItemSele
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),android.R.layout.simple_spinner_item, countries);
         spinner.setAdapter(adapter);
     }
-    //private method of your class
+
     private int getIndex(Spinner spinner, String myString){
         for (int i=0;i<spinner.getCount();i++){
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
