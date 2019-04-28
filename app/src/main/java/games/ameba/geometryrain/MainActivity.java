@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView txtUserName;
     LinearLayout layoutUser;
     String UserName, country;
+    int score;
 
     /**
      * Mètode callback de creació de l'activity. S'indica el layout,
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnNewGame.setOnClickListener(this);
         btnRank.setOnClickListener(this);
         btnExit.setOnClickListener(this);
+
     }
 
     /**
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         UserController.setOnAlreadySignedIn(new UserController.onSignInListener() {
             @Override
             public void onUserSignedIn(User user) {
-                showToast("Welcome "+user.getUsername());
+                //showToast("Welcome "+user.getUsername());
                 setLogged(true);
                 UserName = user.getUsername();
                 country = user.getCountry();
@@ -126,6 +128,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void newGame() {
         Intent i = new Intent(this, GameActivity.class);
         startActivityForResult(i, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
     }
 
     /**

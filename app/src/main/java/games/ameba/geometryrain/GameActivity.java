@@ -212,25 +212,25 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private void updateScore() {
         score = score + 100;
         textView.setText("Score: " + String.valueOf(score));
+        //UserController.addGameScore(score);
     }
 
     /**
      * Acaba la partida
      */
-    private void gameOver() {
-        UserController.addGameScore(score);
-        Toast.makeText(this, "GAME OVER - " +String.valueOf(score)+ " points.", Toast.LENGTH_LONG).show();
-        try{
-            for(Shape a : lista){
-                Shape shape = a;
-                shape.destroyShape();
-            }
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+    public void gameOver() {
+
+        lista.clear();
         timer.cancel();
         timer.purge();
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UserController.addGameScore(score);
+        Toast.makeText(this, "GAME OVER - " + String.valueOf(score) + " points.", Toast.LENGTH_LONG).show();
     }
 
     //getters i setters
